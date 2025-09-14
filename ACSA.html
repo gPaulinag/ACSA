@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACSA - Agencia de Carreras Sociales Argentinas</title>
+  <style>
+    :root{
+      --blue-1:#1e3a8a;
+      --blue-2:#2563eb;
+      --red-1:#ef4444;
+      --red-2:#dc2626;
+      --accent:#facc15;
+      --card-radius:14px;
+    }
+    * {margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;}
+    body {background:#f4f6f9; color:#222; -webkit-font-smoothing:antialiased;}
+
+    /* NAV */
+    nav{position:sticky; top:0; z-index:40; display:flex; justify-content:center; gap:18px; padding:12px 20px; backdrop-filter: blur(6px); background:linear-gradient(90deg, rgba(30,58,138,0.95), rgba(237,70,70,0.95));}
+    nav a{color:white; text-decoration:none; font-weight:700; padding:6px 12px; border-radius:8px;}
+    nav a:hover{background:rgba(255,255,255,0.08);}
+
+    /* HERO */
+    header{position:relative; color:white; padding:110px 20px 80px; overflow:hidden;}
+    header::after{content:""; position:absolute; inset:0; background:linear-gradient(140deg, rgba(30,58,138,0.65), rgba(220,38,38,0.55)); mix-blend-mode:multiply; pointer-events:none;}
+    header::before{content:""; position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat; opacity:0.35;}
+    .hero-inner{position:relative; max-width:1100px; margin:0 auto; text-align:center; z-index:2; animation:fadeInTitle 1.5s ease forwards;}
+    .brand{display:flex; gap:14px; align-items:center; justify-content:center; margin-bottom:12px;}
+    .logo{width:64px; height:64px; border-radius:12px; background:linear-gradient(135deg,var(--blue-2),var(--red-1)); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:20px; box-shadow:0 8px 24px rgba(37,99,235,0.18);}
+    header h1{font-size:3.3rem; line-height:1.02; margin-bottom:12px; text-shadow:0 6px 18px rgba(0,0,0,0.25);} 
+    header p{font-size:1.15rem; max-width:820px; margin:0 auto 20px;}
+    .hero-cta{display:flex; gap:12px; justify-content:center; margin-top:18px;}
+    .btn-primary{background:var(--red-1); color:white; padding:12px 20px; border-radius:10px; border:none; font-weight:700; cursor:pointer; box-shadow:0 8px 20px rgba(237,70,70,0.18);}
+    .btn-secondary{background:transparent; color:white; border:2px solid rgba(255,255,255,0.18); padding:10px 18px; border-radius:10px; font-weight:700; cursor:pointer;}
+
+    section{padding:60px 10%;}
+    h2{color:var(--blue-1); margin-bottom:22px; font-size:1.9rem;}
+
+    /* GRID */
+    .carreras{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px;}
+    .card{background:white; padding:18px; border-radius:var(--card-radius); box-shadow:0 10px 30px rgba(20,40,80,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; overflow:hidden;}
+    /* ZOOM completo forzado */
+    .card:hover{
+      transform: scale(1.05) !important;
+      box-shadow:0 20px 40px rgba(20,40,80,0.10) !important;
+    }
+    .card img{width:100%; height:160px; object-fit:cover; border-radius:10px; display:block; margin-bottom:12px}
+    .card h3{margin:6px 0 8px}
+    .card p{color:#555; font-size:0.98rem;}
+
+    /* animation */
+    @keyframes fadeUp{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:translateY(0)}}
+    .card{opacity:0; animation:fadeUp .6s ease forwards; animation-delay:var(--delay,0s)}
+
+    @keyframes fadeInTitle {from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+
+    /* CONTACT */
+    #contacto{background:linear-gradient(180deg,#fff 0%, #fff2f2 100%); border-radius:12px; padding:36px;}
+    .contact-grid{display:grid; grid-template-columns:1fr 420px; gap:26px; align-items:center}
+    .contact-form label{display:block; font-weight:700; margin-top:8px}
+    .contact-form input, .contact-form textarea{width:100%; padding:10px; border-radius:8px; border:1px solid #e6e6e6; margin-top:6px}
+    .contact-art{background:url('https://images.unsplash.com/photo-1523580846011-d3a5bc25702b?auto=format&fit=crop&w=800&q=80') center/cover no-repeat; border-radius:12px; height:100%; min-height:320px;}
+
+    footer{background:linear-gradient(90deg,var(--blue-1),var(--red-1)); color:white; text-align:center; padding:28px; margin-top:40px}
+
+    /* BUSCADOR */
+    #buscador{margin-bottom:20px; padding:10px; width:100%; max-width:400px; border:1px solid #ddd; border-radius:8px; font-size:1rem;}
+
+    /* Responsive */
+    @media (max-width:900px){
+      header h1{font-size:2.1rem}
+      .contact-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="#presentacion">Presentación</a>
+    <a href="#carreras">Carreras</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <header>
+    <div class="hero-inner">
+      <div class="brand">
+        <div class="logo">
+          <img src="acsa_logo.png" alt="ACSA" style="width:100px; height:100px; border-radius:12px;">
+        </div>
+      </div>
+      <h1>Agencia de Carreras Sociales Argentinas</h1>
+      <p>Descubrí carreras sociales que transforman vidas. Becas, orientación y conexiones con universidades públicas y privadas de Argentina.</p>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn-primary">Solicitar Beca</a>
+        <a href="#carreras" class="btn-secondary">Ver Carreras</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="presentacion">
+    <h2>¿Quiénes somos?</h2>
+    <p>En <strong>ACSA</strong> acompañamos a jóvenes que quieren estudiar carreras con impacto social. Hacemos puente con universidades, ofrecemos charlas, y damos asesoramiento para conseguir becas y prácticas profesionales.</p>
+  </section>
+
+  <section id="carreras">
+    <h2>Carreras Sociales Destacadas</h2>
+    <input type="text" id="buscador" placeholder="Buscar carrera..." onkeyup="filtrarCarreras()" />
+    <div class="carreras" id="lista-carreras">
+      <div class="card" style="--delay:0.05s;">
+        <img src="trabajo_social.png" alt="Trabajo Social">
+        <h3>Trabajo Social</h3>
+        <p>Acompañar a las comunidades, impulsar la inclusión y diseñar políticas sociales que mejoren la calidad de vida.</p>
+      </div>
+      <div class="card" style="--delay:0.12s;">
+        <img src="https://images.unsplash.com/photo-1521295121783-8a321d551ad2?auto=format&fit=crop&w=900&q=80" alt="Geografía Humana">
+        <h3>Geografía Humana</h3>
+        <p>Estudiar cómo las personas habitan y transforman el territorio para pensar ciudades más justas.</p>
+      </div>
+      <div class="card" style="--delay:0.19s;">
+        <img src="sociologia.jpg" alt="Sociología">
+        <h3>Sociología</h3>
+        <p>Analizar estructuras sociales, desigualdades y procesos colectivos para generar conocimiento útil.</p>
+      </div>
+      <div class="card" style="--delay:0.26s;">
+        <img src="psicologia.jpg" alt="Psicología">
+        <h3>Psicología</h3>
+        <p>Comprender la conducta humana y promover bienestar en individuos y comunidades.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=80" alt="Ciencias de la Comunicación">
+        <h3>Ciencias de la Comunicación</h3>
+        <p>Estudiar medios, discursos y tecnologías para transformar la manera en que nos comunicamos.</p>
+      </div>
+      <div class="card">
+        <img src="derecho.png" alt="Derecho">
+        <h3>Derecho</h3>
+        <p>Formar profesionales que promuevan la justicia, la equidad y el respeto por las leyes.</p>
+      </div>
+      <div class="card">
+        <img src="economia.png" alt="Economía">
+        <h3>Economía</h3>
+        <p>Analizar sistemas económicos y proponer soluciones a problemas de desarrollo y distribución.</p>
+      </div>
+      <div class="card">
+        <img src="relacionesinternacionales.jpg" alt="Relaciones Internacionales">
+        <h3>Relaciones Internacionales</h3>
+        <p>Comprender dinámicas globales y generar estrategias de cooperación entre países.</p>
+      </div>
+      <div class="card">
+        <img src="fianzas.png" alt="Finanzas">
+        <h3>Finanzas</h3>
+        <p>Gestionar recursos económicos de manera eficiente en organizaciones y proyectos sociales.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div style="display:flex; align-items:center; justify-content:center; gap:20px; flex-direction:column;">
+      <h2>Contacto</h2>
+      <p style="max-width:760px; text-align:center;">¿Querés más información, una charla informativa para tu escuela o aplicar a una beca? Dejanos tus datos y te contactamos.</p>
+      <div class="contact-grid" style="max-width:1100px; width:100%;">
+        <div class="contact-form">
+          <label for="name">Nombre</label>
+          <input id="name" placeholder="Tu nombre" />
+          <label for="email">Email</label>
+          <input id="email" placeholder="tu@ejemplo.com" />
+          <label for="msg">Mensaje</label>
+          <textarea id="msg" rows="4" placeholder="Quiero info sobre..."></textarea>
+          <div style="margin-top:12px;"><button class="btn-primary" onclick="alert('Gracias — recibimos tu solicitud.');">Enviar</button></div>
+        </div>
+        <div class="contact-art"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 ACSA — Agencia de Carreras Sociales Argentinas</p>
+  </footer>
+
+  <script>
+    function filtrarCarreras() {
+      const input = document.getElementById("buscador").value.toLowerCase();
+      const cards = document.querySelectorAll("#lista-carreras .card");
+      cards.forEach(card => {
+        const titulo = card.querySelector("h3").textContent.toLowerCase();
+        card.style.display = titulo.includes(input) ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
